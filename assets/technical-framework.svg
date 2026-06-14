@@ -1,0 +1,52 @@
+<svg width="1280" height="540" viewBox="0 0 1280 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="540" rx="36" fill="#0E1618"/>
+  <rect x="38" y="38" width="1204" height="464" rx="28" fill="#121D20" stroke="#30484A"/>
+  <text x="72" y="94" fill="#EAF5EE" font-family="Arial, sans-serif" font-size="34" font-weight="700">AIMoCap Video2Motion Technical Framework</text>
+  <text x="72" y="128" fill="#9FB7B1" font-family="Arial, sans-serif" font-size="17">From source video to target-aware animation and robot motion artifacts</text>
+
+  <g>
+    <rect x="76" y="190" width="230" height="150" rx="22" fill="#F4F8F4"/>
+    <text x="106" y="236" fill="#14201F" font-family="Arial, sans-serif" font-size="24" font-weight="700">Source Video</text>
+    <text x="106" y="270" fill="#526360" font-family="Arial, sans-serif" font-size="17">Monocular clip</text>
+    <text x="106" y="298" fill="#526360" font-family="Arial, sans-serif" font-size="17">Trimmed motion range</text>
+  </g>
+
+  <path d="M328 265H406" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
+  <path d="M406 265L388 250V280L406 265Z" fill="#88F0C2"/>
+
+  <g>
+    <rect x="424" y="168" width="270" height="194" rx="22" fill="#DDF7EC"/>
+    <text x="454" y="216" fill="#14201F" font-family="Arial, sans-serif" font-size="24" font-weight="700">Motion Core</text>
+    <text x="454" y="250" fill="#3A5C54" font-family="Arial, sans-serif" font-size="17">Full-body motion estimation</text>
+    <text x="454" y="278" fill="#3A5C54" font-family="Arial, sans-serif" font-size="17">Temporal stabilization</text>
+    <text x="454" y="306" fill="#3A5C54" font-family="Arial, sans-serif" font-size="17">Target-neutral motion</text>
+  </g>
+
+  <path d="M716 265H794" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
+  <path d="M794 265L776 250V280L794 265Z" fill="#88F0C2"/>
+
+  <g>
+    <rect x="812" y="168" width="270" height="194" rx="22" fill="#F3F0FF"/>
+    <text x="842" y="216" fill="#151628" font-family="Arial, sans-serif" font-size="24" font-weight="700">Target Adapter</text>
+    <text x="842" y="250" fill="#5A5870" font-family="Arial, sans-serif" font-size="17">Humanoid retargeting</text>
+    <text x="842" y="278" fill="#5A5870" font-family="Arial, sans-serif" font-size="17">Robot motion mapping</text>
+    <text x="842" y="306" fill="#5A5870" font-family="Arial, sans-serif" font-size="17">Multi-output packaging</text>
+  </g>
+
+  <path d="M1104 236H1174" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1174 236L1156 221V251L1174 236Z" fill="#88F0C2"/>
+  <path d="M1104 304H1174" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1174 304L1156 289V319L1174 304Z" fill="#88F0C2"/>
+
+  <g>
+    <rect x="1012" y="404" width="180" height="44" rx="22" fill="#1F3B38" stroke="#88F0C2"/>
+    <text x="1046" y="432" fill="#EAF5EE" font-family="Arial, sans-serif" font-size="17" font-weight="700">Review UI</text>
+  </g>
+
+  <g>
+    <rect x="1146" y="202" width="92" height="52" rx="16" fill="#F4F8F4"/>
+    <text x="1171" y="235" fill="#14201F" font-family="Arial, sans-serif" font-size="18" font-weight="700">FBX</text>
+    <rect x="1146" y="270" width="92" height="52" rx="16" fill="#F4F8F4"/>
+    <text x="1163" y="303" fill="#14201F" font-family="Arial, sans-serif" font-size="18" font-weight="700">JSON</text>
+  </g>
+</svg>
