@@ -1,52 +1,113 @@
-<svg width="1280" height="540" viewBox="0 0 1280 540" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1280" height="540" rx="36" fill="#0E1618"/>
-  <rect x="38" y="38" width="1204" height="464" rx="28" fill="#121D20" stroke="#30484A"/>
-  <text x="72" y="94" fill="#EAF5EE" font-family="Arial, sans-serif" font-size="34" font-weight="700">AIMoCap Video2Motion Technical Framework</text>
-  <text x="72" y="128" fill="#9FB7B1" font-family="Arial, sans-serif" font-size="17">From source video to target-aware animation and robot motion artifacts</text>
+<svg width="1400" height="760" viewBox="0 0 1400 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="760" rx="18" fill="#0A0F12"/>
+  <rect x="34" y="34" width="1332" height="692" rx="14" fill="#0F171A" stroke="#25363A"/>
+
+  <text x="70" y="86" fill="#F5FAF7" font-family="Arial, sans-serif" font-size="34" font-weight="700">AIMoCap Video2Motion: AI Motion Generation Framework</text>
+  <text x="70" y="120" fill="#A8BAB6" font-family="Arial, sans-serif" font-size="18">Monocular video to temporally stable, target-aware character and robot motion</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L12 7L2 12Z" fill="#84F0B3"/>
+    </marker>
+    <style>
+      .title { fill: #F8FFF9; font-family: Arial, sans-serif; font-size: 21px; font-weight: 700; }
+      .small { fill: #B8C9C5; font-family: Arial, sans-serif; font-size: 15px; }
+      .dark { fill: #13201F; font-family: Arial, sans-serif; font-size: 15px; }
+      .darkTitle { fill: #0C1614; font-family: Arial, sans-serif; font-size: 21px; font-weight: 700; }
+      .chip { fill: #8AF0B6; font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; }
+      .arrow { stroke: #84F0B3; stroke-width: 4; marker-end: url(#arrow); }
+    </style>
+  </defs>
 
   <g>
-    <rect x="76" y="190" width="230" height="150" rx="22" fill="#F4F8F4"/>
-    <text x="106" y="236" fill="#14201F" font-family="Arial, sans-serif" font-size="24" font-weight="700">Source Video</text>
-    <text x="106" y="270" fill="#526360" font-family="Arial, sans-serif" font-size="17">Monocular clip</text>
-    <text x="106" y="298" fill="#526360" font-family="Arial, sans-serif" font-size="17">Trimmed motion range</text>
+    <rect x="70" y="184" width="178" height="170" rx="10" fill="#F4F8F5"/>
+    <text x="94" y="226" class="darkTitle">Input Video</text>
+    <text x="94" y="258" class="dark">RGB frames</text>
+    <text x="94" y="282" class="dark">camera motion</text>
+    <text x="94" y="306" class="dark">trim window</text>
+    <rect x="94" y="326" width="92" height="20" rx="4" fill="#DFF9EA"/>
+    <text x="104" y="341" fill="#1D5A40" font-family="Arial, sans-serif" font-size="12" font-weight="700">T x H x W</text>
   </g>
 
-  <path d="M328 265H406" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
-  <path d="M406 265L388 250V280L406 265Z" fill="#88F0C2"/>
+  <line x1="260" y1="269" x2="328" y2="269" class="arrow"/>
 
   <g>
-    <rect x="424" y="168" width="270" height="194" rx="22" fill="#DDF7EC"/>
-    <text x="454" y="216" fill="#14201F" font-family="Arial, sans-serif" font-size="24" font-weight="700">Motion Core</text>
-    <text x="454" y="250" fill="#3A5C54" font-family="Arial, sans-serif" font-size="17">Full-body motion estimation</text>
-    <text x="454" y="278" fill="#3A5C54" font-family="Arial, sans-serif" font-size="17">Temporal stabilization</text>
-    <text x="454" y="306" fill="#3A5C54" font-family="Arial, sans-serif" font-size="17">Target-neutral motion</text>
+    <rect x="344" y="164" width="228" height="210" rx="10" fill="#172326" stroke="#3B5256"/>
+    <text x="372" y="210" class="title">Single-Frame</text>
+    <text x="372" y="238" class="title">Pose Encoder</text>
+    <text x="372" y="276" class="small">2D keypoints</text>
+    <text x="372" y="300" class="small">body heatmaps</text>
+    <text x="372" y="324" class="small">appearance features</text>
+    <rect x="372" y="342" width="104" height="22" rx="5" fill="#1E3D34"/>
+    <text x="386" y="358" class="chip">CNN / ViT</text>
   </g>
 
-  <path d="M716 265H794" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
-  <path d="M794 265L776 250V280L794 265Z" fill="#88F0C2"/>
+  <line x1="588" y1="269" x2="656" y2="269" class="arrow"/>
 
   <g>
-    <rect x="812" y="168" width="270" height="194" rx="22" fill="#F3F0FF"/>
-    <text x="842" y="216" fill="#151628" font-family="Arial, sans-serif" font-size="24" font-weight="700">Target Adapter</text>
-    <text x="842" y="250" fill="#5A5870" font-family="Arial, sans-serif" font-size="17">Humanoid retargeting</text>
-    <text x="842" y="278" fill="#5A5870" font-family="Arial, sans-serif" font-size="17">Robot motion mapping</text>
-    <text x="842" y="306" fill="#5A5870" font-family="Arial, sans-serif" font-size="17">Multi-output packaging</text>
+    <rect x="672" y="164" width="240" height="210" rx="10" fill="#132D26" stroke="#5FE9A0"/>
+    <text x="700" y="210" class="title">Temporal Motion</text>
+    <text x="700" y="238" class="title">Transformer</text>
+    <text x="700" y="276" class="small">sequence attention</text>
+    <text x="700" y="300" class="small">jitter suppression</text>
+    <text x="700" y="324" class="small">occlusion recovery</text>
+    <rect x="700" y="342" width="142" height="22" rx="5" fill="#1E4B3A"/>
+    <text x="714" y="358" class="chip">embeddings</text>
   </g>
 
-  <path d="M1104 236H1174" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
-  <path d="M1174 236L1156 221V251L1174 236Z" fill="#88F0C2"/>
-  <path d="M1104 304H1174" stroke="#88F0C2" stroke-width="6" stroke-linecap="round"/>
-  <path d="M1174 304L1156 289V319L1174 304Z" fill="#88F0C2"/>
-
-  <g>
-    <rect x="1012" y="404" width="180" height="44" rx="22" fill="#1F3B38" stroke="#88F0C2"/>
-    <text x="1046" y="432" fill="#EAF5EE" font-family="Arial, sans-serif" font-size="17" font-weight="700">Review UI</text>
-  </g>
+  <line x1="928" y1="269" x2="996" y2="269" class="arrow"/>
 
   <g>
-    <rect x="1146" y="202" width="92" height="52" rx="16" fill="#F4F8F4"/>
-    <text x="1171" y="235" fill="#14201F" font-family="Arial, sans-serif" font-size="18" font-weight="700">FBX</text>
-    <rect x="1146" y="270" width="92" height="52" rx="16" fill="#F4F8F4"/>
-    <text x="1163" y="303" fill="#14201F" font-family="Arial, sans-serif" font-size="18" font-weight="700">JSON</text>
+    <rect x="1012" y="164" width="250" height="210" rx="10" fill="#181B32" stroke="#7684FF"/>
+    <text x="1040" y="210" class="title">Diffusion Motion</text>
+    <text x="1040" y="238" class="title">Prior Refinement</text>
+    <text x="1040" y="276" class="small">denoise latent pose</text>
+    <text x="1040" y="300" class="small">fill missing frames</text>
+    <text x="1040" y="324" class="small">motion plausibility</text>
+    <rect x="1040" y="342" width="134" height="22" rx="5" fill="#2B3167"/>
+    <text x="1054" y="358" class="chip">score prior</text>
   </g>
+
+  <g>
+    <rect x="672" y="474" width="240" height="154" rx="10" fill="#F7FBF8"/>
+    <text x="700" y="516" class="darkTitle">Kinematic Layer</text>
+    <text x="700" y="550" class="dark">IK constraints</text>
+    <text x="700" y="574" class="dark">foot contact cleanup</text>
+    <text x="700" y="598" class="dark">root trajectory smoothing</text>
+  </g>
+
+  <line x1="792" y1="390" x2="792" y2="456" class="arrow"/>
+
+  <g>
+    <rect x="1012" y="474" width="250" height="154" rx="10" fill="#F7FBF8"/>
+    <text x="1040" y="516" class="darkTitle">Target Retargeting</text>
+    <text x="1040" y="550" class="dark">humanoid skeleton</text>
+    <text x="1040" y="574" class="dark">custom avatar rig</text>
+    <text x="1040" y="598" class="dark">Unitree G1 mapping</text>
+  </g>
+
+  <line x1="928" y1="551" x2="996" y2="551" class="arrow"/>
+
+  <g>
+    <rect x="70" y="474" width="502" height="154" rx="10" fill="#121D20" stroke="#30484A"/>
+    <text x="96" y="516" class="title">Training / Inference Signals</text>
+    <text x="96" y="552" class="small">pose confidence, temporal consistency, joint limits, contact cues</text>
+    <text x="96" y="582" class="small">The public repository documents the interface and method shape.</text>
+    <text x="96" y="612" class="small">Production weights and service implementation are outside this repo.</text>
+  </g>
+
+  <line x1="572" y1="551" x2="656" y2="551" class="arrow"/>
+
+  <g>
+    <rect x="1288" y="194" width="72" height="52" rx="8" fill="#EAF7EF"/>
+    <text x="1310" y="227" fill="#13201F" font-family="Arial, sans-serif" font-size="18" font-weight="700">FBX</text>
+    <rect x="1288" y="264" width="72" height="52" rx="8" fill="#EAF7EF"/>
+    <text x="1301" y="297" fill="#13201F" font-family="Arial, sans-serif" font-size="18" font-weight="700">JSON</text>
+    <rect x="1288" y="334" width="72" height="52" rx="8" fill="#EAF7EF"/>
+    <text x="1300" y="367" fill="#13201F" font-family="Arial, sans-serif" font-size="18" font-weight="700">GLB</text>
+  </g>
+
+  <line x1="1262" y1="234" x2="1276" y2="234" class="arrow"/>
+  <line x1="1262" y1="291" x2="1276" y2="291" class="arrow"/>
+  <line x1="1262" y1="551" x2="1324" y2="398" class="arrow"/>
 </svg>

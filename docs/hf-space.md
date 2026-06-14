@@ -2,7 +2,7 @@
 
 The AIMoCap HF Space is the fastest way to try the public demo path:
 
-https://huggingface.co/spaces/animate-x/aimocap
+https://huggingface.co/spaces/animtex/AIMoCap
 
 Use it when you want to test a short clip before opening AIMoCap Studio or
 integrating the API.

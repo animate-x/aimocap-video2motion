@@ -6,7 +6,7 @@
 <p align="center">
   <a href="https://animate-x.github.io/aimocap"><b>Project Page</b></a>
   &nbsp;|&nbsp;
-  <a href="https://huggingface.co/spaces/animate-x/aimocap"><b>HF Space</b></a>
+  <a href="https://huggingface.co/spaces/animtex/AIMoCap"><b>HF Space</b></a>
   &nbsp;|&nbsp;
   <a href="https://aimocap.net"><b>AIMoCap Studio</b></a>
   &nbsp;|&nbsp;
@@ -29,6 +29,19 @@ This repository is intentionally documentation-first. It provides a technical
 overview, public API examples, output format notes, demo links, and release
 roadmap while keeping service implementation and private model assets outside
 the public release.
+
+## Introduction
+
+Video-based motion capture has become an attractive alternative to marker-based
+capture because it lowers the input requirement to ordinary RGB video. However,
+most pose-estimation demos stop at keypoints or frame-wise reconstruction, which
+leaves downstream users with temporal jitter, missing-frame artifacts, retarget
+ambiguity, and manual export cleanup.
+
+AIMoCap Video2Motion frames the problem as target-aware motion generation. The
+system first collects per-frame pose evidence from a monocular clip, then uses
+sequence models and motion priors to recover stable full-body motion before
+retargeting the result to character animation and robot motion formats.
 
 ## News
 
@@ -55,31 +68,60 @@ the public release.
   <img src="assets/technical-framework.svg" alt="AIMoCap technical framework" width="920" />
 </p>
 
-AIMoCap separates video mocap into four public-facing stages:
+AIMoCap is presented as a modular video-to-motion generation pipeline. The
+public framework is organized around single-frame pose evidence, sequence-level
+motion modeling, generative motion refinement, and target-specific retargeting:
 
-| Stage | Goal | Public Artifact |
+| Module | Role | Technical Intuition |
 | --- | --- | --- |
-| Source preparation | Select a short, readable video segment | Source clip and target IDs |
-| Motion reconstruction | Recover full-body temporal motion | Target-neutral motion representation |
-| Target adaptation | Map motion to downstream targets | FBX or robot motion tracks |
-| Review and export | Inspect visual output before handoff | Preview video and downloadable files |
+| Single-frame pose encoder | Extract frame-local body evidence | CNN/ViT-style pose features, 2D keypoints, confidence maps |
+| Temporal motion transformer | Model cross-frame consistency | Self-attention over motion embeddings for jitter suppression and occlusion recovery |
+| Diffusion motion prior | Refine plausible full-body motion | Denoising-style latent motion repair for missing or noisy frames |
+| Kinematic constraint layer | Improve physical consistency | joint limits, root trajectory smoothing, foot contact cleanup |
+| Target retargeting head | Produce downstream files | humanoid FBX, custom avatar motion, Unitree G1 motion JSON |
 
 The public repository documents the interface and output behavior of the
 workflow rather than the production implementation.
 
 ## Method Overview
 
-The workflow is designed around target-specific delivery:
+The method can be read as a two-level reconstruction problem: frame-local
+estimation provides noisy but dense evidence, while sequence-level models
+recover temporally coherent motion suitable for export.
 
-1. **Input admission**: a client submits job metadata, target IDs, and video
-   filename information.
-2. **Video upload**: the source clip is uploaded using the returned upload URL.
-3. **Motion job execution**: the submitted clip is processed into a normalized
-   motion representation.
-4. **Target retargeting**: the normalized motion is converted into humanoid
-   animation or Unitree G1 motion output.
-5. **Result retrieval**: the client reads a result object containing preview and
-   downloadable output URLs.
+1. **Frame evidence extraction**: each RGB frame is encoded into pose evidence
+   such as 2D joints, body heatmaps, subject appearance features, and confidence
+   estimates.
+2. **Temporal embedding**: per-frame observations are assembled into sequence
+   embeddings, allowing the model to reason across adjacent and long-range frames.
+3. **Transformer stabilization**: a temporal Transformer suppresses jitter,
+   propagates reliable pose cues through occlusions, and regularizes root/body
+   trajectories.
+4. **Diffusion prior refinement**: a generative motion prior denoises latent
+   pose sequences and repairs implausible frames under learned motion dynamics.
+5. **Kinematic cleanup**: contact-aware constraints, joint limit checks, and IK
+   corrections improve export stability for character and robot targets.
+6. **Target adaptation**: the target head retargets the normalized motion to
+   humanoid FBX, custom avatar rigs, or Unitree G1 motion JSON.
+
+In public API terms, the workflow remains asynchronous: create a job, upload the
+clip, poll status, and retrieve preview plus target-specific outputs.
+
+## Algorithmic Notes
+
+The following abstractions are useful when comparing AIMoCap with pose-only
+repositories:
+
+| Component | Pose-only baseline | AIMoCap-style motion pipeline |
+| --- | --- | --- |
+| Observation | independent frames | frame features plus sequence context |
+| Temporal reasoning | smoothing or tracking after pose estimation | Transformer over motion embeddings |
+| Motion prior | often absent | diffusion-style denoising prior |
+| Contact handling | usually manual cleanup | contact-aware kinematic correction |
+| Output representation | 2D/3D keypoints | exportable FBX and robot motion tracks |
+
+This repository does not publish model weights or training code. It documents
+the public interface, expected outputs, and high-level algorithmic design.
 
 ## Output Targets
 
@@ -97,7 +139,7 @@ schemas and field notes.
 | Scenario | Input | Output | Entry |
 | --- | --- | --- | --- |
 | Video to humanoid motion | Short monocular clip | FBX animation | [Project page](https://animate-x.github.io/aimocap) |
-| Video to Unitree G1 motion | Same clip | Robot motion JSON | [HF Space](https://huggingface.co/spaces/animate-x/aimocap) |
+| Video to Unitree G1 motion | Same clip | Robot motion JSON | [HF Space](https://huggingface.co/spaces/animtex/AIMoCap) |
 | Multi-target review | One submitted job | Target-specific outputs | [AIMoCap Studio](https://aimocap.net) |
 
 ## Technical Comparison
