@@ -1,7 +1,7 @@
 # AIMoCap Video2Motion
 
-> AI video mocap from a short monocular clip to animation-ready FBX and Unitree
-> G1 robot motion output.
+> AI video mocap from a short monocular clip to animation-ready FBX and
+> Unitree G1 robot motion output.
 
 <p align="center">
   <a href="https://animate-x.github.io/aimocap"><b>Project Page</b></a>
@@ -17,28 +17,37 @@
   <img src="assets/hero-video-poster.jpg" alt="AIMoCap video mocap demo" width="920" />
 </p>
 
-## Introduction
+## Abstract
 
-AIMoCap Video2Motion is a public entry point for a browser-first motion capture
-workflow. It focuses on converting a clean short video into motion artifacts
-that can be reviewed and handed off to animation or robotics pipelines.
+AIMoCap Video2Motion is a public entry repository for a browser-first video
+motion capture workflow. Given a short monocular video, the workflow targets
+motion artifacts that can be reviewed and handed off to animation or robotics
+pipelines: humanoid FBX for character workflows and Unitree G1 motion JSON for
+robot-oriented review.
 
-Unlike pose-only demos that stop at keypoints, AIMoCap is designed around
-target-aware motion delivery: humanoid FBX for character animation and Unitree
-G1 motion JSON for robot-oriented review.
+This repository is intentionally documentation-first. It provides a technical
+overview, public API examples, output format notes, demo links, and release
+roadmap while keeping service implementation and private model assets outside
+the public release.
+
+## News
+
+- **2026-06**: Public project page and README report released.
+- **2026-06**: Public Python API example and output format notes added.
+- **2026-06**: Unitree G1 motion output documented as a first public robot target.
 
 ## Key Features
 
-- **Markerless video mocap**: start from monocular video without a suit or
-  optical marker setup.
-- **Target-aware output**: request humanoid FBX, Unitree G1 robot motion, or a
-  multi-target job from the same clip.
+- **Markerless video mocap**: start from a monocular video clip without a suit,
+  optical markers, or a capture stage.
+- **Target-aware motion delivery**: request humanoid FBX, Unitree G1 robot
+  motion JSON, or a multi-target job from the same source clip.
 - **Review-first workflow**: trim, submit, inspect visual output, and download
-  files only after the result is ready.
-- **Public API example**: use the asynchronous job flow from Python or other
-  production tools.
-- **Project-page demo path**: use the research-style page and HF Space before
-  opening AIMoCap Studio.
+  files after the result is ready.
+- **Asynchronous public API shape**: create a job, upload the clip, poll status,
+  and retrieve target-specific outputs.
+- **Research-style project page**: inspect demos, comparison tables, and the
+  high-level method before opening AIMoCap Studio.
 
 ## Technical Framework
 
@@ -46,24 +55,42 @@ G1 motion JSON for robot-oriented review.
   <img src="assets/technical-framework.svg" alt="AIMoCap technical framework" width="920" />
 </p>
 
-The public workflow is organized around four stages:
+AIMoCap separates video mocap into four public-facing stages:
 
-1. **Source preparation**: upload a short video, trim the motion range, and
-   select target outputs.
-2. **Motion reconstruction**: estimate full-body motion from the selected clip
-   and normalize it into a target-neutral motion representation.
-3. **Target adaptation**: map reconstructed motion into humanoid animation or
-   robot motion formats.
-4. **Review and export**: inspect preview output and download target-specific
-   files.
+| Stage | Goal | Public Artifact |
+| --- | --- | --- |
+| Source preparation | Select a short, readable video segment | Source clip and target IDs |
+| Motion reconstruction | Recover full-body temporal motion | Target-neutral motion representation |
+| Target adaptation | Map motion to downstream targets | FBX or robot motion tracks |
+| Review and export | Inspect visual output before handoff | Preview video and downloadable files |
+
+The public repository documents the interface and output behavior of the
+workflow rather than the production implementation.
+
+## Method Overview
+
+The workflow is designed around target-specific delivery:
+
+1. **Input admission**: a client submits job metadata, target IDs, and video
+   filename information.
+2. **Video upload**: the source clip is uploaded using the returned upload URL.
+3. **Motion job execution**: the submitted clip is processed into a normalized
+   motion representation.
+4. **Target retargeting**: the normalized motion is converted into humanoid
+   animation or Unitree G1 motion output.
+5. **Result retrieval**: the client reads a result object containing preview and
+   downloadable output URLs.
 
 ## Output Targets
 
 | Target | Public ID | Output | Typical Use |
 | --- | --- | --- | --- |
-| Humanoid animation | `default` | FBX | DCC review, cleanup, game engine import |
-| Unitree G1 | `unitree_g1` | robot motion JSON | Robot motion collection and simulation review |
+| Humanoid animation | `default` | FBX | DCC review, cleanup, Unity or Unreal import |
+| Unitree G1 | `unitree_g1` | Motion JSON | Robot motion collection and simulation review |
 | Custom avatar | planned public API | FBX | Character-specific retargeting |
+
+See [examples/output-formats](examples/output-formats) for simplified output
+schemas and field notes.
 
 ## Demo Results
 
@@ -83,6 +110,7 @@ The public workflow is organized around four stages:
 | Robot motion target | No | No | No | Unitree G1 |
 | Browser review workflow | Limited | No | Sometimes | Yes |
 | Public API flow | Varies | No | Varies | Yes |
+| Multi-target export from one clip | Usually no | Workflow dependent | Usually no | Yes |
 
 ## Public API Overview
 
@@ -114,20 +142,80 @@ Minimal request shape:
 }
 ```
 
+Minimal result shape:
+
+```json
+{
+  "job": {
+    "id": "job_example",
+    "status": "completed"
+  },
+  "previewVideoUrl": "https://aimocap.net/example-preview.mp4",
+  "outputs": [
+    {
+      "targetId": "default",
+      "resultType": "fbx",
+      "fbxUrl": "https://aimocap.net/example-motion.fbx"
+    },
+    {
+      "targetId": "unitree_g1",
+      "resultType": "robot_motion_json",
+      "motionJsonUrl": "https://aimocap.net/example-g1-motion.json"
+    }
+  ]
+}
+```
+
 See [examples/python](examples/python) for an end-to-end Python example.
+
+## Repository Layout
+
+```text
+.
+|-- README.md
+|-- assets/
+|   |-- hero-video-poster.jpg
+|   |-- feature-video-motion-poster.jpg
+|   |-- feature-video-robot-poster.jpg
+|   `-- technical-framework.svg
+|-- docs/
+|   |-- api-quickstart.md
+|   |-- hf-space.md
+|   |-- open-source-roadmap.md
+|   `-- workflow.md
+`-- examples/
+    |-- output-formats/
+    `-- python/
+```
 
 ## Repository Scope
 
 This repository contains public documentation, examples, output format notes,
 and demo links. It is intentionally scoped as an open entry repository.
 
+Included here:
+
+- technical overview and public workflow description
+- public API examples with placeholder keys
+- simplified output format notes
+- demo links and project-page references
+
 Not included here:
 
 - hosted service implementation
 - production motion processing code
-- account, billing, or deployment code
+- account or billing code
 - private model assets
 - non-public service configuration
+
+## Limitations
+
+- The public examples describe the API shape and expected workflow; exact
+  production availability can vary by release.
+- Output quality depends on the source clip. Clear body visibility, stable
+  framing, and short motion segments are recommended.
+- Robot motion output is intended for review and downstream validation before
+  use in physical systems.
 
 ## Citation-Style Reference
 

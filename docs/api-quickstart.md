@@ -1,24 +1,48 @@
 # API Quickstart
 
-AIMoCap uses an asynchronous API flow:
+AIMoCap uses an asynchronous video-to-motion job flow. The public examples
+describe the request and response shape used by client integrations.
 
-1. Create a job.
-2. Upload the source video.
-3. Complete upload admission.
-4. Poll until the job reaches a final state.
-5. Read the result and download outputs.
-
-Public base URL:
+## Base URL
 
 ```text
 https://aimocap.net
 ```
 
-Public target IDs:
+## Public Target IDs
 
-```text
-default
-unitree_g1
+| Target ID | Output | Notes |
+| --- | --- | --- |
+| `default` | FBX | Humanoid animation output |
+| `unitree_g1` | motion JSON | Unitree G1-oriented motion output |
+
+## Job Lifecycle
+
+1. Create a mocap job with source metadata and target IDs.
+2. Upload the source video using the returned upload URL.
+3. Complete upload admission for the job.
+4. Poll until the job reaches `completed`, `failed`, or `canceled`.
+5. Read the result object and download target-specific outputs.
+
+## Minimal Create Payload
+
+```json
+{
+  "title": "walk-cycle",
+  "sourceFilename": "walk.mp4",
+  "targetIds": ["default", "unitree_g1"],
+  "exportFps": 30
+}
 ```
 
-See `examples/python` for a minimal end-to-end example.
+## Status Model
+
+| Status | Meaning |
+| --- | --- |
+| `queued` | Job has been accepted and is waiting to run |
+| `processing` | Motion generation is in progress |
+| `completed` | Result metadata and outputs are available |
+| `failed` | Job did not complete successfully |
+| `canceled` | Job was canceled before completion |
+
+See [examples/python](../examples/python) for a minimal end-to-end example.

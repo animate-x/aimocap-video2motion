@@ -7,6 +7,13 @@ AIMoCap currently focuses on two public output types.
 The `default` target returns an FBX animation file for review, cleanup, and DCC
 workflows such as Maya, MotionBuilder, Unity, or Unreal Engine.
 
+Recommended review checks:
+
+- frame rate matches the expected export setting
+- root motion is usable for the target scene
+- contact-heavy actions are inspected before production use
+- scale and orientation are verified after import
+
 ## Unitree G1 Motion JSON
 
 The `unitree_g1` target returns a robot motion JSON file.
@@ -26,3 +33,16 @@ Simplified shape:
 ```
 
 The file represents per-frame robot base motion and joint positions.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `version` | integer | Public schema version |
+| `robotType` | string | Robot target identifier |
+| `fps` | integer | Frames per second |
+| `frameCount` | integer | Number of motion frames |
+| `root_pos` | array | Per-frame root position |
+| `root_rot_xyzw` | array | Per-frame root rotation quaternion |
+| `dof_pos` | array | Per-frame joint positions |
+
+Robot-oriented output should be treated as a motion artifact for review and
+downstream validation.
