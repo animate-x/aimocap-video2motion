@@ -123,6 +123,40 @@ repositories:
 This repository does not publish model weights or training code. It documents
 the public interface, expected outputs, and high-level algorithmic design.
 
+## Related Open-Source Work
+
+The current open mocap ecosystem is broad. The projects below are representative
+research or engineering references, not a claim that all methods were evaluated
+under one benchmark.
+
+| Project | Input Setting | Main Technical Focus | Public Strength | Difference from AIMoCap |
+| --- | --- | --- | --- | --- |
+| [EasyMocap](https://github.com/zju3dv/EasyMocap) | multi-view cameras | full-body fitting and multi-view reconstruction | practical research toolkit for calibrated capture | AIMoCap targets monocular public demos and export delivery |
+| [XRMoCap](https://github.com/openxrlab/xrmocap) | multi-view / XR setups | modular 3D human reconstruction pipeline | strong engineering framework for mocap research | AIMoCap focuses on browser-first video jobs and target outputs |
+| [WHAM](https://github.com/yohanshin/WHAM) | monocular video | world-grounded human motion recovery | strong global trajectory reasoning from video | AIMoCap adds product-facing FBX and robot export paths |
+| [GVHMR](https://github.com/zju3dv/GVHMR) | monocular video | world-grounded video human motion recovery | recent sequence-level human motion recovery direction | AIMoCap emphasizes downstream animation and robot artifacts |
+| [TRAM](https://github.com/yufu-wang/tram) | monocular video | tracking and reconstructing humans in videos | video tracking plus human reconstruction | AIMoCap packages results for public API and review workflows |
+| [4DHumans / HMR2](https://github.com/shubham-goel/4D-Humans) | image / video frames | feed-forward human mesh recovery | useful human mesh and pose baseline | AIMoCap adds temporal repair and export-focused retargeting |
+| [MotionBERT](https://github.com/Walter0807/MotionBERT) | pose sequences | transformer-based 3D pose and motion learning | strong sequence modeling reference | AIMoCap combines sequence modeling with output adaptation |
+| [HybrIK](https://github.com/Jeff-sjtu/HybrIK) | image frames | inverse-kinematics-aware body pose recovery | kinematic reasoning for human body recovery | AIMoCap applies kinematic cleanup before file export |
+
+## Academic Positioning
+
+AIMoCap is best understood as an application-facing layer over several research
+directions:
+
+| Research Direction | Representative Focus | AIMoCap Interpretation |
+| --- | --- | --- |
+| Frame-wise pose estimation | recover per-frame body evidence | used as noisy observations rather than final output |
+| Temporal human motion recovery | reduce jitter and infer missing motion | handled through sequence modeling and motion priors |
+| Generative motion refinement | improve plausibility under learned dynamics | used as a repair prior for unstable segments |
+| Kinematic and contact reasoning | improve physical consistency | used before retargeting to FBX or robot motion |
+| Retargeting and export | adapt motion to downstream rigs | first-class goal of the public workflow |
+
+This positioning is deliberately different from a pure reconstruction benchmark:
+the public repository is about interface, reproducible examples, output schemas,
+and comparison-ready documentation for a hosted video-to-motion workflow.
+
 ## Output Targets
 
 | Target | Public ID | Output | Typical Use |
