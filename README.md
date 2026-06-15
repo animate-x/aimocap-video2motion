@@ -2,15 +2,27 @@
 
 > AI video mocap from a short monocular clip to animation-ready FBX and
 > Unitree G1 robot motion output.
+>
+> Keywords: AI video motion capture, markerless mocap, video-to-motion,
+> monocular human motion recovery, FBX animation export, Unitree G1 robot motion.
 
 <p align="center">
-  <a href="https://animate-x.github.io/aimocap"><b>Project Page</b></a>
+  <a href="https://animate-x.github.io/aimocap/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview"><b>Project Page</b></a>
   &nbsp;|&nbsp;
-  <a href="https://huggingface.co/spaces/animtex/AIMoCap"><b>HF Space</b></a>
+  <a href="https://huggingface.co/spaces/animtex/AIMoCap?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview"><b>HF Space</b></a>
   &nbsp;|&nbsp;
-  <a href="https://aimocap.net"><b>AIMoCap Studio</b></a>
+  <a href="https://aimocap.net/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview"><b>AIMoCap Studio</b></a>
   &nbsp;|&nbsp;
-  <a href="https://aimocap.net/docs/api-overview"><b>API Docs</b></a>
+  <a href="https://aimocap.net/docs/api-overview?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview"><b>API Docs</b></a>
+</p>
+
+<p align="center">
+  <a href="https://animate-x.github.io/aimocap/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview"><img alt="Project Page" src="https://img.shields.io/badge/project-page-80efa9"></a>
+  <a href="https://huggingface.co/spaces/animtex/AIMoCap?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview"><img alt="HF Space" src="https://img.shields.io/badge/HF-Space-ffcc4d"></a>
+  <a href="https://aimocap.net/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview"><img alt="Website" src="https://img.shields.io/badge/website-aimocap.net-f8fbf8"></a>
+  <a href="examples/python"><img alt="API Examples" src="https://img.shields.io/badge/API-examples-84b7ff"></a>
+  <a href="examples/output-formats"><img alt="Output Formats" src="https://img.shields.io/badge/output-formats-b6a5ff"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-f0c66d"></a>
 </p>
 
 <p align="center">
@@ -42,6 +54,28 @@ AIMoCap Video2Motion frames the problem as target-aware motion generation. The
 system first collects per-frame pose evidence from a monocular clip, then uses
 sequence models and motion priors to recover stable full-body motion before
 retargeting the result to character animation and robot motion formats.
+
+## Why This Repo Exists
+
+This repository is the public technical report, integration guide, and example
+hub for AIMoCap Video2Motion. It is designed to help developers and researchers
+quickly understand the workflow, output targets, API shape, and related mocap
+ecosystem.
+
+It is not a full model-weight or training-code release. The public boundary is
+intentional: examples, output schemas, demos, and technical positioning are
+included here; hosted service implementation and private model assets are not.
+
+## Developer Quick Links
+
+| Need | Link |
+| --- | --- |
+| Try the public demo | [HF Space](https://huggingface.co/spaces/animtex/AIMoCap?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview) |
+| See the project page | [AIMoCap Project Page](https://animate-x.github.io/aimocap/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview) |
+| Open the full Studio workflow | [AIMoCap Studio](https://aimocap.net/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview) |
+| Run an API-style example | [examples/python](examples/python) |
+| Inspect output notes | [examples/output-formats](examples/output-formats) |
+| Read workflow guidance | [docs/workflow.md](docs/workflow.md) |
 
 ## News
 
@@ -123,7 +157,7 @@ repositories:
 This repository does not publish model weights or training code. It documents
 the public interface, expected outputs, and high-level algorithmic design.
 
-## Related Open-Source Work
+## Related Work and SOTA Context
 
 The current open mocap ecosystem is broad. The projects below are representative
 research or engineering references, not a claim that all methods were evaluated
@@ -157,6 +191,21 @@ This positioning is deliberately different from a pure reconstruction benchmark:
 the public repository is about interface, reproducible examples, output schemas,
 and comparison-ready documentation for a hosted video-to-motion workflow.
 
+## Search Keywords
+
+This repository is intended to be discoverable for:
+
+- AI video motion capture
+- markerless mocap
+- video to motion
+- monocular human motion recovery
+- 3D human motion recovery
+- FBX animation export
+- Unitree G1 motion
+- robot motion generation
+- temporal motion transformer
+- diffusion motion refinement
+
 ## Output Targets
 
 | Target | Public ID | Output | Typical Use |
@@ -172,9 +221,9 @@ schemas and field notes.
 
 | Scenario | Input | Output | Entry |
 | --- | --- | --- | --- |
-| Video to humanoid motion | Short monocular clip | FBX animation | [Project page](https://animate-x.github.io/aimocap) |
-| Video to Unitree G1 motion | Same clip | Robot motion JSON | [HF Space](https://huggingface.co/spaces/animtex/AIMoCap) |
-| Multi-target review | One submitted job | Target-specific outputs | [AIMoCap Studio](https://aimocap.net) |
+| Video to humanoid motion | Short monocular clip | FBX animation | [Project page](https://animate-x.github.io/aimocap/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview) |
+| Video to Unitree G1 motion | Same clip | Robot motion JSON | [HF Space](https://huggingface.co/spaces/animtex/AIMoCap?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview) |
+| Multi-target review | One submitted job | Target-specific outputs | [AIMoCap Studio](https://aimocap.net/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview) |
 
 ## Technical Comparison
 
@@ -308,8 +357,8 @@ If you discuss AIMoCap Video2Motion in a technical note, use:
 
 ## Links
 
-- Project page: https://animate-x.github.io/aimocap
-- Website: https://aimocap.net
-- API docs: https://aimocap.net/docs/api-overview
+- Project page: https://animate-x.github.io/aimocap/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview
+- Website: https://aimocap.net/?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview
+- API docs: https://aimocap.net/docs/api-overview?utm_source=github_readme&utm_medium=readme&utm_campaign=public_preview
 - Output formats: [examples/output-formats](examples/output-formats)
 - Roadmap: [docs/open-source-roadmap.md](docs/open-source-roadmap.md)
